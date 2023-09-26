@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('https://ih1.redbubble.net/image.1709341819.1225/st,small,507x507-pad,600x600,f8f8f8.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .calculator {
+      width: 220px;
+      padding: 20px;
+      background-color: #f4f4f4;
+      border-radius: 5px;
+    }
+
+    .calculator input[type="text"] {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .calculator input[type="button"] {
+      width: 48%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .clown {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 80px;
+      animation: clownAnimation 1s forwards;
+      opacity: 0;
+    }
+
+    @keyframes clownAnimation {
+      0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" readonly>
+    <input type="button" value="1" onclick="appendToDisplay('1'); showClown(event)">
+    <input type="button" value="2" onclick="appendToDisplay('2'); showClown(event)">
+    <input type="button" value="3" onclick="appendToDisplay('3'); showClown(event)">
+    <input type="button" value="4" onclick="appendToDisplay('4'); showClown(event)">
+    <input type="button" value="5" onclick="appendToDisplay('5'); showClown(event)">
+    <input type="button" value="6" onclick="appendToDisplay('6'); showClown(event)">
+    <input type="button" value="7" onclick="appendToDisplay('7'); showClown(event)">
+    <input type="button" value="8" onclick="appendToDisplay('8'); showClown(event)">
+    <input type="button" value="9" onclick="appendToDisplay('9'); showClown(event)">
+    <input type="button" value="0" onclick="appendToDisplay('0'); showClown(event)">
+    <input type="button" value="+" onclick="appendToDisplay('+'); showClown(event)">
+    <input type="button" value="-" onclick="appendToDisplay('-'); showClown(event)">
+    <input type="button" value="*" onclick="appendToDisplay('*'); showClown(event)">
+    <input type="button" value="/" onclick="appendToDisplay('/'); showClown(event)">
+    <input type="button" value="=" onclick="calculate(); showClown(event)">
+    <input type="button" value="Clear" onclick="clearDisplay(); showClown(event)">
+    <input type="button" value="Square" onclick="calculateSquare(); showClown(event)">
+    <input type="button" value="Cube" onclick="calculateCube(); showClown(event)">
+  </div>
+
+  <script>
+    function appendToDisplay(value) {
+      document.getElementById("display").value += value;
+    }
+
+    function calculate() {
+      var display = document.getElementById("display");
+      var result = eval(display.value);
+      display.value = result;
+    }
+
+    function clearDisplay() {
+      document.getElementById("display").value = "";
+    }
+
+    function calculateSquare() {
+      var display = document.getElementById("display");
+      var number = parseFloat(display.value);
+      var result = number * number;
+      display.value = result;
+    }
+
+    function calculateCube() {
+      var display = document.getElementById("display");
+      var number = parseFloat(display.value);
+      var result = number * number * number;
+      display.value = result;
+    }
+
+    function showClown(event) {
+      var clown = document.createElement("div");
+      clown.className = "clown";
+      clown.innerHTML = "🤡";
+      document.body.appendChild(clown);
+      setTimeout(function() {
+        document.body.removeChild(clown);
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
